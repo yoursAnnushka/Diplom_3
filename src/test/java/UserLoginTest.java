@@ -1,5 +1,5 @@
-import API.User;
-import API.UserSteps;
+import api.User;
+import api.UserSteps;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Before;
@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 
 import java.time.Duration;
 
-import static API.User.getRandomUser;
+import static api.User.getRandomUser;
 import static org.junit.Assert.assertTrue;
 
 public class UserLoginTest {
@@ -77,7 +77,7 @@ public class UserLoginTest {
     @After
     public void tearDown() {
         try {
-            String accessToken = userSteps.userLogin(user.getEmail(), user.getPassword())
+            String accessToken = userSteps.userLogin(user)
                     .extract().body().path("accessToken");
 
             if (accessToken != null) {

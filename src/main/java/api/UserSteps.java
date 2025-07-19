@@ -1,4 +1,4 @@
-package API;
+package api;
 
 import io.qameta.allure.Step;
 import io.restassured.http.ContentType;
@@ -26,14 +26,11 @@ public class UserSteps {
     }
 
     @Step("Авторизация пользователя")
-    public ValidatableResponse userLogin(String email, String password) {
+    public ValidatableResponse userLogin(User user) {
         return given()
                 .baseUri(BASE_URI)
                 .contentType(ContentType.JSON)
-                .body("{\n" +
-                        "\"email\": \""+ email +"\",\n" +
-                        "\"password\": \""+ password +"\"\n" +
-                        "}")
+                .body(user)
                 .when()
                 .post(ENDPOINT_USER_LOGIN)
                 .then();
@@ -44,9 +41,7 @@ public class UserSteps {
         given()
                 .baseUri(BASE_URI)
                 .contentType(ContentType.JSON)
-                .body("{\n" +
-                        "\"accessToken\": \""+ accessToken +"\"\n" +
-                        "}")
+                .body(accessToken)
                 .when()
                 .delete(ENDPOINT_DELETE_USER)
                 .then();
